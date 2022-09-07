@@ -5,8 +5,7 @@ document.getElementById("btnEditar").style.display = "none";
 // ---------------------------------------------------
 var filas = null;
 let alumnos = [];
-
-cargarPag();
+let alumnosOld = cargarPag();
 
 const btn_reg = document.querySelector("#btnAgregar");
 btn_reg.addEventListener("click", event => crear(event));
@@ -22,7 +21,9 @@ function crear(event) {
  
     console.log(b);
 
-
+    if(alumnos.length == 0){
+        alumnos = alumnosOld;
+    }
     if (b == true) {
         alert("Agrega los datos");
     } else {
@@ -110,6 +111,7 @@ function cargarPag() {
     console.log(c);
 
     cargaDatosLS(c);
+    return c;
 
 }
 
