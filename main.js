@@ -10,17 +10,15 @@ let alumnosOld = cargarPag();
 const btn_reg = document.querySelector("#btnAgregar");
 btn_reg.addEventListener("click", event => crear(event));
 
+const btn_ed = document.querySelector("#btnEditar");
+btn_ed.addEventListener("click", event => crear(event));
+
 
 function crear(event) {
-    // event.preventDefault();
     let datosRegistro = leerDatos();
-
     let a = Object.values(datosRegistro);
     let b = a.some(e => e == '');
 
-
-    console.log(b);
-  
     if (this.alumnos) {
         if (this.alumnos.length == 0) {
             this.alumnos = alumnosOld;
@@ -28,18 +26,16 @@ function crear(event) {
     } else {
         this.alumnos = [];
     }
+
     if (b == true) {
-        alert("Agrega los datos");
+        alert("Favor complete toda la información");
     } else {
-        alumnos.push(datosRegistro);
-        localStorage.setItem("alumno", JSON.stringify(alumnos));
         if (filas === null) {
+            alumnos.push(datosRegistro);
+            localStorage.setItem("alumno", JSON.stringify(alumnos));
             escDatos(datosRegistro);
-            console.log(filas + "= Null del if crear");
-            console.log(datosRegistro + " Esto Agregue");
         } else {
             actualizando(datosRegistro);
-            console.log(filas + "= False del else crear");
         }
         resetTodo();
     }
@@ -48,9 +44,13 @@ function crear(event) {
 // obtener datos
 function leerDatos() {
     let datosRegistro = {};
+
     datosRegistro["nombreAlumno"] = document.getElementById("nombreAlumno").value;
+
     datosRegistro["notaUno"] = document.getElementById("notaUno").value;
+
     datosRegistro["notaDos"] = document.getElementById("notaDos").value;
+
     return datosRegistro;
 
 }
@@ -81,30 +81,36 @@ function escDatos(datos) {
 // editar 
 function editando(edi) {
     filas = edi.parentElement.parentElement;
-    document.getElementById("nombreAlumno").value = filas.cells[0].innerHTML;
-    document.getElementById("notaUno").value = filas.cells[1].innerHTML;
-    document.getElementById("notaDos").value = filas.cells[2].innerHTML;
-   
-}
 
+    document.getElementById("nombreAlumno").value = filas.cells[0].innerHTML;
+
+    document.getElementById("notaUno").value = filas.cells[1].innerHTML;
+
+    document.getElementById("notaDos").value = filas.cells[2].innerHTML;
+
+    document.getElementById("btnAgregar").style.display = "none";
+    document.getElementById("btnEditar").style.display = "";
+
+}
 
 function actualizando(datosRegistro) {
     filas.cells[0].innerHTML = datosRegistro.nombreAlumno;
     filas.cells[1].innerHTML = datosRegistro.notaUno;
     filas.cells[2].innerHTML = datosRegistro.notaDos;
     filas.cells[3].innerHTML = (parseFloat(datosRegistro.notaUno) + parseFloat(datosRegistro.notaDos)) / 2;
-    alumnos.splice(filas.rowIndex-1,1);
+
+    alumnos[filas.rowIndex - 1].nombreAlumno = datosRegistro.nombreAlumno;
+    alumnos[filas.rowIndex - 1].notaUno = datosRegistro.notaUno;
+    alumnos[filas.rowIndex - 1].notaDos = datosRegistro.notaDos;
     localStorage.setItem("alumno", JSON.stringify(alumnos));
 }
-
-
 
 // borrar
 function borrando(edi) {
     if (confirm('Tay Seguro')) {
         borrar = edi.parentElement.parentElement;
         document.getElementById("lista").deleteRow(borrar.rowIndex);
-        alumnos.splice(borrar.rowIndex-1,1);
+        alumnos.splice(borrar.rowIndex - 1, 1);
         localStorage.setItem("alumno", JSON.stringify(alumnos));
     }
     resetTodo();
@@ -116,20 +122,21 @@ function resetTodo() {
     document.getElementById("notaDos").value = '';
 }
 
-// manejo de local storage para printpant
+// Volver a cargar los datos luego de un reload a la pagina
 function cargarPag() {
-    console.log("hola");
     c = JSON.parse(localStorage.getItem("alumno"));
-    console.log(alumnos);
-    console.log(c + " Este es c");
+
     if (c !== null) {
-        alumnos = c; 
+        alumnos = c;
     }
-    cargaDatosLS(c);
+
+    let nomb = c.sort((f, g) => {
+        return f.nombreAlumno > g.nombreAlumno;
+    })
+    cargaDatosLS(nomb);
+    console.table(nomb);
     return c;
-
 }
-
 
 function cargaDatosLS(c) {
     if (c !== null) {
@@ -165,3 +172,4 @@ function cargaDatosLS(c) {
         }
     }
 }
+
