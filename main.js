@@ -84,6 +84,7 @@ function editando(edi) {
     document.getElementById("nombreAlumno").value = filas.cells[0].innerHTML;
     document.getElementById("notaUno").value = filas.cells[1].innerHTML;
     document.getElementById("notaDos").value = filas.cells[2].innerHTML;
+   
 }
 
 
@@ -92,9 +93,11 @@ function actualizando(datosRegistro) {
     filas.cells[1].innerHTML = datosRegistro.notaUno;
     filas.cells[2].innerHTML = datosRegistro.notaDos;
     filas.cells[3].innerHTML = (parseFloat(datosRegistro.notaUno) + parseFloat(datosRegistro.notaDos)) / 2;
-    alumnos.splice(filas.rowIndex-1,1,{nombreAlumno:datosRegistro.nombreAlumno, notaUno:datosRegistro.notaUno, notaDos:datosRegistro.notaDos});
+    alumnos.splice(filas.rowIndex-1,1);
     localStorage.setItem("alumno", JSON.stringify(alumnos));
 }
+
+
 
 // borrar
 function borrando(edi) {
