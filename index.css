@@ -1,3 +1,49 @@
 * {
     font-family: 'Lora', serif;
 }
+
+/* Navbar */
+.cnav {
+    background-color: #6d9db37c;
+}
+
+/* Formulario */
+.fondo {
+    background-color: #ac2bac;
+}
+
+/* Lista */
+
+
+/* footer */
+
+.cfoot {
+    background-color: #6d9db37c;
+}
+
+.colortw {
+    color: #4a78f6;
+}
+
+.colorig {
+    color: #ac2bac;
+}
+
+.colorgit {
+    color: #000000;
+}
+
+/*Footer efectos hover*/
+
+
+.colortw:hover {
+    color: #4aa9f6;
+}
+
+.colorig:hover {
+    color: #ed38ed;
+}
+
+.colorgit:hover {
+    color: #909090;
+}

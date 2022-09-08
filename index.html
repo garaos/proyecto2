@@ -5,51 +5,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Proyecto 2</title>
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="./index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
     <!-- navbar -->
-    <section>
-        <nav class="navbar bg-light">
-            <div class="container-fluid">
-                <span class="navbar-brand mb-0 h1">Navbar</span>
-            </div>
-        </nav>
-    </section>
+    <header>
+        <section>
+            <nav class="navbar cnav">
+                <div class="container-fluid">
+                    <span class="navbar-brand mb-0 h1"><i class="fa-solid fa-graduation-cap"></i> Ingreso de
+                        Notas</span>
+                </div>
+            </nav>
+        </section>
+    </header>
     <!-- fin navbar -->
     <!-- formulario y/o registro -->
     <section>
         <div class="d-flex pt-5 px-5 pb-5">
             <div class="container">
                 <div class="d-flex justify-content-center">
-                    <div class="col-12 bg-light border border-primary border-opacity-10 rounded p-3">
-                        <form autocomplete="off"> <!--sin autocompletado-->
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="nombreAlumno" placeholder="Nombre"
-                                    required>
+                    <div class="col-12 bg-secondary text-white border border-primary border-opacity-10 rounded p-3">
+                        <!--sin autocompletado autocomplete="off"-->
+                        <form autocomplete="off">
+                            <div class="input-group mb-3 pt-2">
+                                <input type="text" class="form-control" id="nombreAlumno" placeholder="Nombre" required>
                             </div>
-
-                            <div class="input-group mb-3">
+                            <div class="col-md-3 pt-3">
+                                <p class="fs-5 fw-bold">Notas</p>
                                 <input type="number" class="form-control" id="notaUno" placeholder="Nota 1" required>
                             </div>
-
-                            <div class="input-group mb-3">
+                            <div class="col-md-3 pt-3">
                                 <input type="number" class="form-control" id="notaDos" placeholder="Nota 2" required>
                             </div>
 
                             <!-- botones -->
                             <div class="mt-4">
-                                <button class="btn btn-secondary" type="button" id="btnAgregar">Agregar</button>
-                                <button class="btn btn-secondary" type="button" id="btnEditar">Actualizar</button>
+                                <button class="btn btn-light" type="button" id="btnAgregar">Agregar</button>
+                                <button class="btn btn-light" type="button" id="btnEditar">Actualizar</button>
                             </div>
                         </form>
                     </div>
@@ -62,15 +64,14 @@
     <!-- lista como tabla-->
     <section>
         <div class="d-flex pt-2 px-5 pb-5">
-            <table class="container bg-light border border-primary border-opacity-10 rounded" id="lista">
-                <thead>
+            <table class="container bg-secondary text-white border border-primary border-opacity-10 rounded" id="lista">
+                <thead class="text-white fw-bold border-bottom">
                     <th scope="col">Nombre Alumno</th>
                     <th scope="col">Nota 1</th>
                     <th scope="col">Nota 2</th>
-                    <th scope="col"> Promedio</th>
+                    <th scope="col">Promedio</th>
                 </thead>
-                <tbody>
-
+                <tbody class="fst-italic fw-semibold">
                 </tbody>
             </table>
         </div>
@@ -79,6 +80,26 @@
 
 
     <!-- footer -->
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top cfoot">
+        <div class="col-md-4 d-flex align-items-center mx-3 mt-3">
+            <h4 class="text-dark text-opacity-75 fw-bolder"><i class="fa-solid fa-graduation-cap"></i> Ingreso de Notas
+            </h4>
+        </div>
+        <div class="mx-3 mt-3">
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex px-2">
+                <!-- twitter -->
+                <li class="ms-3"><a class="m-1 colortw" href="https://twitter.com" role="button" target="_blank"><i
+                            class="fab fa-twitter fa-lg"></i></a></li>
+                <!-- instagran -->
+                <li class="ms-3"><a class="m-1 colorig" href="https://www.instagram.com" role="button"
+                        target="_blank"><i class="fa-brands fa-instagram fa-lg"></i></a></li>
+                <!-- Github -->
+                <li class="ms-3"><a class="m-1 colorgit" href="https://github.com/garaos/proyecto2" role="button"
+                        target="_blank"><i class="fa-brands fa-github"></i></a></li>
+            </ul>
+        </div>
+    </footer>
 
     <!-- fin footer -->
 
@@ -89,6 +110,7 @@
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
     <script src="./main.js"></script>
+    <script src="https://kit.fontawesome.com/0abb840f04.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
