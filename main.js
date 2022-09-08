@@ -3,7 +3,7 @@
 document.getElementById("btnEditar").style.display = "none";
 
 // ---------------------------------------------------
-var filas = null;
+let filas = null;
 let alumnos = [];
 let alumnosOld = cargarPag();
 
@@ -18,22 +18,25 @@ function crear(event) {
     let a = Object.values(datosRegistro);
     let b = a.some(e => e == '');
 
- 
-    console.log(b);
 
-    if(alumnos.length == 0){
-        alumnos = alumnosOld;
+    console.log(b);
+  
+    if (this.alumnos) {
+        if (this.alumnos.length == 0) {
+            this.alumnos = alumnosOld;
+        }
+    } else {
+        this.alumnos = [];
     }
     if (b == true) {
         alert("Agrega los datos");
     } else {
-     
         alumnos.push(datosRegistro);
-       
         localStorage.setItem("alumno", JSON.stringify(alumnos));
         if (filas === null) {
             escDatos(datosRegistro);
             console.log(filas + "= Null del if crear");
+            console.log(datosRegistro + " Esto Agregue");
         } else {
             actualizando(datosRegistro);
             console.log(filas + "= False del else crear");
@@ -71,6 +74,8 @@ function escDatos(datos) {
 
     let btnEdEl = esclista.insertCell(4);
     btnEdEl.innerHTML = `<button onClick='editando(this)'>Editar</button> <button onClick='borrando(this)'>Eliminar</button>`;
+
+
 }
 
 // editar 
@@ -87,6 +92,8 @@ function actualizando(datosRegistro) {
     filas.cells[1].innerHTML = datosRegistro.notaUno;
     filas.cells[2].innerHTML = datosRegistro.notaDos;
     filas.cells[3].innerHTML = (parseFloat(datosRegistro.notaUno) + parseFloat(datosRegistro.notaDos)) / 2;
+    alumnos.splice(filas.rowIndex-1,1,{nombreAlumno:datosRegistro.nombreAlumno, notaUno:datosRegistro.notaUno, notaDos:datosRegistro.notaDos});
+    localStorage.setItem("alumno", JSON.stringify(alumnos));
 }
 
 // borrar
@@ -94,6 +101,8 @@ function borrando(edi) {
     if (confirm('Tay Seguro')) {
         borrar = edi.parentElement.parentElement;
         document.getElementById("lista").deleteRow(borrar.rowIndex);
+        alumnos.splice(borrar.rowIndex-1,1);
+        localStorage.setItem("alumno", JSON.stringify(alumnos));
     }
     resetTodo();
 }
@@ -107,16 +116,19 @@ function resetTodo() {
 // manejo de local storage para printpant
 function cargarPag() {
     console.log("hola");
-    let c = JSON.parse(localStorage.getItem("alumno"));
-    console.log(c);
-
+    c = JSON.parse(localStorage.getItem("alumno"));
+    console.log(alumnos);
+    console.log(c + " Este es c");
+    if (c !== null) {
+        alumnos = c; 
+    }
     cargaDatosLS(c);
     return c;
 
 }
 
 
-function  cargaDatosLS(c){
+function cargaDatosLS(c) {
     if (c !== null) {
         console.log("si vamos");
         console.log(filas);
@@ -125,8 +137,8 @@ function  cargaDatosLS(c){
             let nombreFor = c[index].nombreAlumno;
             let nota1For = c[index].notaUno;
             let nota2For = c[index].notaDos;
-            
-            console.log("esta entrando"+" posicion"+ " "+ index);
+
+            console.log("esta entrando" + " posicion" + " " + index);
             console.log(nombreFor);
             console.log(nota1For);
             console.log(nota2For);
@@ -141,12 +153,12 @@ function  cargaDatosLS(c){
 
             let regTresLS = escLS.insertCell(2);
             regTresLS.innerHTML = nota2For;
-        
+
             let regCuatroLS = escLS.insertCell(3);
             regCuatroLS.innerHTML = (parseFloat(nota1For) + parseFloat(nota2For)) / 2;
-        
+
             let btnEdElLS = escLS.insertCell(4);
             btnEdElLS.innerHTML = `<button onClick='editando(this)'>Editar</button> <button onClick='borrando(this)'>Eliminar</button>`;
         }
-    } 
+    }
 }
