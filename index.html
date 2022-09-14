@@ -42,17 +42,23 @@
                             <div class="input-group mb-3 pt-2">
                                 <input type="text" class="form-control" id="nombreAlumno" placeholder="Nombre" required>
                             </div>
-                            <div class="col-md-3 pt-3">
-                                <p class="fs-5 fw-bold">Notas</p>
-                                <input type="number" class="form-control" id="notaUno" placeholder="Nota 1" required>
-                            </div>
-                            <div class="col-md-3 pt-3">
-                                <input type="number" class="form-control" id="notaDos" placeholder="Nota 2" required>
+                            <div>
+                                <p class="fs-5 fw-bold pt-3">Notas</p>
+                                <div class="col-md-3">
+                                    <input type="number" class="form-control" id="notaUno" placeholder="Nota 1"
+                                        step="0.1" min="1" max="7">
+                                </div>
+                                <div class="col-md-3 pt-3">
+                                    <input type="number" class="form-control" id="notaDos" placeholder="Nota 2"
+                                        step="0.1" min="1" max="7">
+                                </div>
+                                <p class="pt-3 fst-italic">* Las notas deben ser de 1 a 7, con uso de punto (.) para separación decimal</p>
                             </div>
                             <!-- botones -->
-                            <div class="mt-4">
+                            <div class="pt-1">
                                 <button class="btn btn-success fw-bolder" type="button" id="btnAgregar">Agregar</button>
-                                <button class="btn btn-success fw-bolder" type="button" id="btnEditar">Actualizar</button>
+                                <button class="btn btn-success fw-bolder" type="button"
+                                    id="btnEditar">Actualizar</button>
                             </div>
                         </form>
                     </div>
@@ -64,7 +70,7 @@
         <div class="d-flex pt-2 px-1 px-md-5 px-lg-5 pb-5 table-responsive">
             <table class="container text-dark table table-striped shadow rounded-2" id="lista">
                 <thead class="text-dark fw-bold">
-                    <tr>
+                    <tr class="text-uppercase">
                         <th scope="col"></th>
                         <th scope="col">Nombre Alumno</th>
                         <th scope="col">Nota 1</th>
@@ -77,7 +83,7 @@
                 </tbody>
             </table>
         </div>
-         <!-- fin lista -->
+        <!-- fin lista -->
     </section>
     <!--Fin Registro y tabla -->
     <!-- footer -->

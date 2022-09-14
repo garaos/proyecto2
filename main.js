@@ -32,15 +32,19 @@ function create(event) {
     if (b == true) {
         alert("Favor complete toda la información");
     } else {
-        if (filas === null) {
-            alumnos.push(dataReg);
-            localStorage.setItem("alumno", JSON.stringify(alumnos));
-            writeData(dataReg);
-        } else {
-            actualize(dataReg);
-            filas = null;
+        if (a[1] >=1 && a[2] <= 7 && a[1]<=7 && a[2] >= 1) {
+            if (filas === null) {
+                alumnos.push(dataReg);
+                localStorage.setItem("alumno", JSON.stringify(alumnos));
+                writeData(dataReg);
+            } else {
+                actualize(dataReg);
+                filas = null;
+            }
+            resetAll();
+        }else {
+            alert("Ingreso un valor entre 1 y 7")
         }
-        resetAll();
     }
 }
 
@@ -68,6 +72,7 @@ function writeData(datos) {
 
     let regUno = writeList.insertCell(1);
     regUno.innerHTML = datos.nombreAlumno;
+    regUno.className= 'text-uppercase';
 
     let regDos = writeList.insertCell(2);
     regDos.innerHTML = datos.notaUno;
@@ -159,7 +164,8 @@ function cargaDatosLS(c) {
 
             let regUnoLS = escLS.insertCell(1);
             regUnoLS.innerHTML = nombreFor;
-            
+            regUnoLS.className= 'text-uppercase';
+
             let regDosLS = escLS.insertCell(2);
             regDosLS.innerHTML = nota1For;
 
@@ -171,8 +177,6 @@ function cargaDatosLS(c) {
 
             let btnEdElLS = escLS.insertCell(5);
             btnEdElLS.innerHTML = `<button onClick='editData(this)' class="btn-ed"><i class="fa-solid fa-user-pen"></i></button> <button onClick='erase(this)' class="btn-del"><i class="fa-solid fa-trash-can"></i></button>`;
-
-           
         }
     }
 }

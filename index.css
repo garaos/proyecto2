@@ -13,7 +13,7 @@ html ::-webkit-scrollbar-thumb {
 }
 
 html ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(transparent,#00c6ff);
+    background: linear-gradient(transparent,#0dff00);
 
 }
 
@@ -40,7 +40,9 @@ button {
 }
 
 .btn-ed {
-    background-color: #38bc36;
+    background-color: #188754;
+    color: aliceblue;
+
 }
 
 .btn-del {
