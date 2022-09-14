@@ -2,24 +2,63 @@
     font-family: 'Lora', serif;
 }
 
-/* Navbar */
-.cnav {
-    background-color: #6d9db37c;
+/* scroll bar */
+::-webkit-scrollbar {
+width: 1vw;
 }
 
-/* Formulario */
-.fondo {
-    background-color: #ac2bac;
+html ::-webkit-scrollbar-thumb {
+    background: linear-gradient(transparent,#909090bd);
+    border-radius: 6px;
+}
+
+html ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(transparent,#00c6ff);
+
+}
+
+::-webkit-scrollbar-track {
+    background-color: #667e8471;
+}
+
+
+/* Navbar */
+.cGreen {
+    /* color Navbar y Footer */
+    background-color: #49bf44f1;
 }
 
 /* Lista */
+th {
+    padding: 1px 15px;
+}
 
+button {
+    padding: 10px 10px;
+    margin: 10px 0 10px;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-ed {
+    background-color: #249822;
+}
+
+.btn-del {
+    background-color: #fe0000;
+}
+
+td {
+    padding: 1px 15px;
+}
+
+table tr td:last-child {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
 
 /* footer */
-
-.cfoot {
-    background-color: #6d9db37c;
-}
 
 .colortw {
     color: #4a78f6;

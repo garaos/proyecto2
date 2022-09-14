@@ -15,6 +15,8 @@ btn_ed.addEventListener("click", event => crear(event));
 
 
 function crear(event) {
+    event.preventDefault();
+    btn_reg.blur();
     let datosRegistro = leerDatos();
     let a = Object.values(datosRegistro);
     let b = a.some(e => e == '');
@@ -60,20 +62,23 @@ function escDatos(datos) {
     let tablaLista = document.getElementById("lista").getElementsByTagName('tbody')[0];
     let esclista = tablaLista.insertRow(tablaLista.length);
 
-    let regUno = esclista.insertCell(0);
+    let regZero = esclista.insertCell(0);
+    regZero.innerHTML = `<i class="fa-solid fa-otter"></i> `;
+
+    let regUno = esclista.insertCell(1);
     regUno.innerHTML = datos.nombreAlumno;
 
-    let regDos = esclista.insertCell(1);
+    let regDos = esclista.insertCell(2);
     regDos.innerHTML = datos.notaUno;
 
-    let regTres = esclista.insertCell(2);
+    let regTres = esclista.insertCell(3);
     regTres.innerHTML = datos.notaDos;
 
-    let regCuatro = esclista.insertCell(3);
+    let regCuatro = esclista.insertCell(4);
     regCuatro.innerHTML = (parseFloat(datos.notaUno) + parseFloat(datos.notaDos)) / 2;
 
-    let btnEdEl = esclista.insertCell(4);
-    btnEdEl.innerHTML = `<button onClick='editando(this)'>Editar</button> <button onClick='borrando(this)'>Eliminar</button>`;
+    let btnEdEl = esclista.insertCell(5);
+    btnEdEl.innerHTML = `<button onClick='editando(this)' class="btn-ed"><i class="fa-solid fa-user-pen"></i></button> <button onClick='borrando(this)' class="btn-del"><i class="fa-solid fa-trash-can"></i></button>`;
 
 
 }
@@ -82,35 +87,42 @@ function escDatos(datos) {
 function editando(edi) {
     filas = edi.parentElement.parentElement;
 
-    document.getElementById("nombreAlumno").value = filas.cells[0].innerHTML;
+    document.getElementById("nombreAlumno").value = filas.cells[1].innerHTML;
 
-    document.getElementById("notaUno").value = filas.cells[1].innerHTML;
+    document.getElementById("notaUno").value = filas.cells[2].innerHTML;
 
-    document.getElementById("notaDos").value = filas.cells[2].innerHTML;
+    document.getElementById("notaDos").value = filas.cells[3].innerHTML;
 
     document.getElementById("btnAgregar").style.display = "none";
-    document.getElementById("btnEditar").style.display = "";
+    document.getElementById("btnEditar").style.display = "block";
 
 }
 
 function actualizando(datosRegistro) {
-    filas.cells[0].innerHTML = datosRegistro.nombreAlumno;
-    filas.cells[1].innerHTML = datosRegistro.notaUno;
-    filas.cells[2].innerHTML = datosRegistro.notaDos;
-    filas.cells[3].innerHTML = (parseFloat(datosRegistro.notaUno) + parseFloat(datosRegistro.notaDos)) / 2;
+    filas.cells[0].innerHTML = `<i class="fa-solid fa-otter"></i> `;
+    filas.cells[1].innerHTML = datosRegistro.nombreAlumno;
+    filas.cells[2].innerHTML = datosRegistro.notaUno;
+    filas.cells[3].innerHTML = datosRegistro.notaDos;
+    filas.cells[4].innerHTML = (parseFloat(datosRegistro.notaUno) + parseFloat(datosRegistro.notaDos)) / 2;
 
     alumnos[filas.rowIndex - 1].nombreAlumno = datosRegistro.nombreAlumno;
     alumnos[filas.rowIndex - 1].notaUno = datosRegistro.notaUno;
     alumnos[filas.rowIndex - 1].notaDos = datosRegistro.notaDos;
     localStorage.setItem("alumno", JSON.stringify(alumnos));
+    document.getElementById("btnAgregar").style.display = "block";
+    document.getElementById("btnEditar").style.display = "none";
 }
 
 // borrar
 function borrando(edi) {
-    if (confirm('Tay Seguro')) {
+
+    if (confirm('Confirme que desea eliminar')) {
         borrar = edi.parentElement.parentElement;
-        document.getElementById("lista").deleteRow(borrar.rowIndex);
+
         alumnos.splice(borrar.rowIndex - 1, 1);
+        document.getElementById("lista").deleteRow(borrar.rowIndex);
+        console.log(borrar.rowIndex);
+        console.table(alumnos);
         localStorage.setItem("alumno", JSON.stringify(alumnos));
     }
     resetTodo();
@@ -130,45 +142,43 @@ function cargarPag() {
         alumnos = c;
     }
 
-    let nomb = c.sort((f, g) => {
-        return f.nombreAlumno > g.nombreAlumno;
-    })
-    cargaDatosLS(nomb);
-    console.table(nomb);
+    // let nomb = c.sort((f, g) => {
+    //     return f.nombreAlumno > g.nombreAlumno;
+    // })
+    cargaDatosLS(c);
+    // console.table(nomb);
     return c;
 }
 
 function cargaDatosLS(c) {
     if (c !== null) {
-        console.log("si vamos");
-        console.log(filas);
-
         for (let index = 0; index < c.length; index++) {
             let nombreFor = c[index].nombreAlumno;
             let nota1For = c[index].notaUno;
             let nota2For = c[index].notaDos;
 
-            console.log("esta entrando" + " posicion" + " " + index);
-            console.log(nombreFor);
-            console.log(nota1For);
-            console.log(nota2For);
-
             let tablaLS = document.getElementById("lista").getElementsByTagName('tbody')[0];
             let escLS = tablaLS.insertRow(tablaLS.length);
-            let regUnoLS = escLS.insertCell(0);
-            regUnoLS.innerHTML = nombreFor;
 
-            let regDosLS = escLS.insertCell(1);
+            let regZeroLS = escLS.insertCell(0);
+            regZeroLS.innerHTML = `<i class="fa-solid fa-otter"></i> `;
+
+            let regUnoLS = escLS.insertCell(1);
+            regUnoLS.innerHTML = nombreFor;
+            
+            let regDosLS = escLS.insertCell(2);
             regDosLS.innerHTML = nota1For;
 
-            let regTresLS = escLS.insertCell(2);
+            let regTresLS = escLS.insertCell(3);
             regTresLS.innerHTML = nota2For;
 
-            let regCuatroLS = escLS.insertCell(3);
+            let regCuatroLS = escLS.insertCell(4);
             regCuatroLS.innerHTML = (parseFloat(nota1For) + parseFloat(nota2For)) / 2;
 
-            let btnEdElLS = escLS.insertCell(4);
-            btnEdElLS.innerHTML = `<button onClick='editando(this)'>Editar</button> <button onClick='borrando(this)'>Eliminar</button>`;
+            let btnEdElLS = escLS.insertCell(5);
+            btnEdElLS.innerHTML = `<button onClick='editando(this)' class="btn-ed"><i class="fa-solid fa-user-pen"></i></button> <button onClick='borrando(this)' class="btn-del"><i class="fa-solid fa-trash-can"></i></button>`;
+
+           
         }
     }
 }
