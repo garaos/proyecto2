@@ -104,7 +104,7 @@ function editData(edi) {
 
 function actualize(dataReg) {
     filas.cells[0].innerHTML = `<i class="fa-solid fa-otter"></i> `;
-    filas.cells[1].innerHTML = dataReg.nombreAlumno;
+    filas.cells[1].innerHTML = dataReg.nombreAlumno.toUpperCase();
     filas.cells[2].innerHTML = dataReg.notaUno;
     filas.cells[3].innerHTML = dataReg.notaDos;
     filas.cells[4].innerHTML = (parseFloat(dataReg.notaUno) + parseFloat(dataReg.notaDos)) / 2;
