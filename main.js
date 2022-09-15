@@ -21,10 +21,8 @@ function create(event) {
     let a = Object.values(dataReg);
     let b = a.some(e => e == '');
 
-    if (this.alumnos) {
-        if (this.alumnos.length == 0) {
+    if (this.alumnos && this.alumnos.length == 0) {
             this.alumnos = alumnosOld;
-        }
     } else {
         this.alumnos = [];
     }
@@ -71,8 +69,8 @@ function writeData(datos) {
     regZero.innerHTML = `<i class="fa-solid fa-otter"></i> `;
 
     let regUno = writeList.insertCell(1);
-    regUno.innerHTML = datos.nombreAlumno;
-    regUno.className= 'text-uppercase';
+    regUno.innerHTML = datos.nombreAlumno.toUpperCase();
+
 
     let regDos = writeList.insertCell(2);
     regDos.innerHTML = datos.notaUno;
@@ -163,8 +161,7 @@ function cargaDatosLS(c) {
             regZeroLS.innerHTML = `<i class="fa-solid fa-otter"></i> `;
 
             let regUnoLS = escLS.insertCell(1);
-            regUnoLS.innerHTML = nombreFor;
-            regUnoLS.className= 'text-uppercase';
+            regUnoLS.innerHTML = nombreFor.toUpperCase();
 
             let regDosLS = escLS.insertCell(2);
             regDosLS.innerHTML = nota1For;
